@@ -6,12 +6,12 @@ gpus: full
 vllm: false
 
 models:
-  - name: "gpt-oss-120b"
+  - name: "gpt-oss-120b-free"
     repo: "openai/gpt-oss-120b@b5c939de8f754692c1647ca79fbf85e8c1e70f8a"
     mpk: "db5daddec41a3be3b51d1f4d009fb0e9b1243c2765e2bc5121acac79ab070a72_195764056064_0eefa619-50b7-588f-a072-d405fb439d36"
 
 containers:
-  - name: "gpt-oss-120b"
+  - name: "gpt-oss-120b-free"
     image: ""
     args: [
       "--runtime", "nvidia",
