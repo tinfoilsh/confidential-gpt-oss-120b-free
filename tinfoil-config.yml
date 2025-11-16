@@ -19,7 +19,7 @@ containers:
       "--ipc", "host",
       "vllm/vllm-openai:v0.11.0@sha256:014a95f21c9edf6abe0aea6b07353f96baa4ec291c427bb1176dc7c93a85845c",
       "--model", "/tinfoil/mpk/mpk-db5daddec41a3be3b51d1f4d009fb0e9b1243c2765e2bc5121acac79ab070a72",
-      "--served-model-name", "gpt-oss-120b",
+      "--served-model-name", "gpt-oss-120b-free",
       "--enable-auto-tool-choice",
       "--tool-call-parser", "openai",
       "--gpu-memory-utilization", "0.95",
