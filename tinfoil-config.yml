@@ -1,0 +1,37 @@
+shim-version: v0.2.10@sha256:f9040a48106ab06c290fd9b225d4dd53a2daad715c9107594d4310b21592039f
+cvm-version: 0.5.7
+cpus: 8
+memory: 65536
+gpus: full
+vllm: false
+
+models:
+  - name: "gpt-oss-120b"
+    repo: "openai/gpt-oss-120b@b5c939de8f754692c1647ca79fbf85e8c1e70f8a"
+    mpk: "db5daddec41a3be3b51d1f4d009fb0e9b1243c2765e2bc5121acac79ab070a72_195764056064_0eefa619-50b7-588f-a072-d405fb439d36"
+
+containers:
+  - name: "gpt-oss-120b"
+    image: ""
+    args: [
+      "--runtime", "nvidia",
+      "--gpus", "all",
+      "--ipc", "host",
+      "vllm/vllm-openai:v0.11.0@sha256:014a95f21c9edf6abe0aea6b07353f96baa4ec291c427bb1176dc7c93a85845c",
+      "--model", "/tinfoil/mpk/mpk-db5daddec41a3be3b51d1f4d009fb0e9b1243c2765e2bc5121acac79ab070a72",
+      "--served-model-name", "gpt-oss-120b",
+      "--enable-auto-tool-choice",
+      "--tool-call-parser", "openai",
+      "--gpu-memory-utilization", "0.95",
+      "--port", "8001"
+    ]
+
+shim:
+  listen-port: 443
+  upstream-port: 8001
+  publish-attestation: false
+  tls-challenge: dns
+  paths:
+    - /v1/chat/completions
+    - /metrics
+    - /v1/responses
