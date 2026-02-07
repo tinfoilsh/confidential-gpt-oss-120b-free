@@ -1,8 +1,7 @@
-shim-version: v0.3.5@sha256:f44c65a1f7db476be20c3431bb6facea8c2966606a07fbb5724a619f82bfa558
-cvm-version: 0.5.16
+shim-version: v0.3.12@sha256:b81f2295ae6750d61e94f810ce24077360001b6ec795d13643f3170df29e304d
+cvm-version: 0.6.6
 cpus: 16
 memory: 65536
-gpus: full
 
 models:
   - name: "gpt-oss-120b-free"
@@ -11,12 +10,13 @@ models:
 
 containers:
   - name: "gpt-oss-120b-free"
-    image: ""
-    args: [
-      "--runtime", "nvidia",
-      "--gpus", "all",
-      "--ipc", "host",
-     "vllm/vllm-openai:v0.13.0@sha256:d623253f2ba246378421c9642e20885e65257f38418ff26d48c81aea1702521b",
+    image: "vllm/vllm-openai:v0.15.1-cu130@sha256:6daf4c3bab1bfb0180069bd8f2a035c1c981a424584f5b0480caa9efd9933f72"
+    runtime: nvidia
+    gpus: all
+    ipc: host
+    env:
+      - LD_LIBRARY_PATH: "/usr/local/nvidia/lib64:/usr/local/nvidia/lib:/usr/lib/x86_64-linux-gnu"
+    command: [
       "--model", "/tinfoil/mpk/mpk-db5daddec41a3be3b51d1f4d009fb0e9b1243c2765e2bc5121acac79ab070a72",
       "--served-model-name", "gpt-oss-120b-free",
       "--enable-auto-tool-choice",
